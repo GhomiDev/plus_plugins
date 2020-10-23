@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   connectivity_plus_platform_interface: ^0.2.0
-  dbus: 0.0.0-dev.20
+  dbus: ">=0.0.0-dev.17 <=0.0.0-dev.19"
   meta: ^1.2.3
 
 dev_dependencies:

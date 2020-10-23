@@ -28,9 +28,14 @@ class NetworkManager extends DBusRemoteObject {
   }
 
   Stream<String> subscribeTypeChanged() {
-    return subscribePropertiesChanged()
-        .where((event) => event.changedProperties.containsKey(_kType))
-        .map((event) => (event.changedProperties[_kType] as DBusString).value);
+    final controller = StreamController<String>();
+    subscribePropertiesChanged((_, changedProperties, __) {
+      final type = changedProperties[_kType];
+      if (type != null) {
+        controller.add((type as DBusString).value);
+      }
+    });
+    return controller.stream;
   }
 
   Future<NMConnection> createConnection() {
